@@ -11,7 +11,7 @@ const dbConfig = {
 
 // Crear el pool de conexiones fuera del handler para reutilizarlo
 let pool;
-//caamilo duarte
+
 exports.handler = async (event) => {
     if (!pool) pool = mysql.createPool(dbConfig);
     
@@ -55,6 +55,29 @@ exports.handler = async (event) => {
         };
     }
 };
+
+
+// Ve a IAM > Users.
+
+// Selecciona tu usuario github-actions.
+
+// En la pestaña Permissions, haz clic en Add permissions > Add inline policy.
+
+// Haz clic en la pestaña JSON y pega este código (borra lo que haya ahí):
+
+// JSON
+// {
+//     "Version": "2012-10-17",
+//     "Statement": [
+//         {
+//             "Effect": "Allow",
+//             "Action": [
+//                 "lambda:UpdateFunctionCode"
+//             ],
+//             "Resource": "arn:aws:lambda:us-east-1:xxxxxxxxxxxx:function:NOMBREDETULAMBDA"
+//         }
+//     ]
+// }
 
 
 // exports.handler = async (event) => {

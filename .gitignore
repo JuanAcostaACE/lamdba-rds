@@ -1,11 +1,13 @@
 # Dependencias
 node_modules/
 
+
 # Archivos de entorno (Seguridad)
 .env
 
 # Paquetes de despliegue
 function.zip
+lambda.zip
 
 # Logs y basura del sistema
 npm-debug.log*
