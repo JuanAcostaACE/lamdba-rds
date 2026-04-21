@@ -11,6 +11,7 @@ const dbConfig = {
 };
 
 // Crear el pool de conexiones fuera del handler para reutilizarlo
+// lkhklhkljhklhlkhklj
 let pool;
 // cloud computing!!!!
 exports.handler = async (event) => {
