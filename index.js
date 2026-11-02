@@ -11,53 +11,8 @@ const dbConfig = {
 };
 
 // Crear el pool de conexiones fuera del handler para reutilizarlo
-// lkhklhkljhklhlkhklj
+
 let pool;
-// cloud computing!!!!
-exports.handler = async (event) => {
-    if (!pool) pool = mysql.createPool(dbConfig);
-    
-    const { routeKey, pathParameters, body } = event;
-    const id = pathParameters ? pathParameters.id : null;
-    const data = body ? JSON.parse(body) : {};
-
-    try {
-        let result;
-        switch (routeKey) {
-            case "GET /users":
-                [result] = await pool.query("SELECT * FROM users");
-                break;
-                
-            case "POST /add":
-                [result] = await pool.query("INSERT INTO users SET ?", data);
-                break;
-                
-            case "PUT /update/{id}":
-                [result] = await pool.query("UPDATE users SET ? WHERE id = ?", [data, id]);
-                break;
-                
-            case "DELETE /delete/{id}":
-                [result] = await pool.query("DELETE FROM users WHERE id = ?", id);
-                break;
-                
-            default:
-                throw new Error(`Ruta no soportada: ${routeKey}`);
-        }
-
-        return {
-            statusCode: 200,
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-            body: JSON.stringify(result)
-        };
-
-    } catch (err) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: err.message })
-        };
-    }
-};
-
 
 // exports.handler = async (event) => {
 //     if (!pool) {
@@ -117,6 +72,50 @@ exports.handler = async (event) => {
 //     }
 // };
 
+// cloud computing!!!!
+exports.handler = async (event) => {
+    if (!pool) pool = mysql.createPool(dbConfig);
+    
+    const { routeKey, pathParameters, body } = event;
+    const id = pathParameters ? pathParameters.id : null;
+    const data = body ? JSON.parse(body) : {};
+
+    try {
+        let result;
+        switch (routeKey) {
+            case "GET /users":
+                [result] = await pool.query("SELECT * FROM users");
+                break;
+                
+            case "POST /add":
+                [result] = await pool.query("INSERT INTO users SET ?", data);
+                break;
+                
+            case "PUT /update/{id}":
+                [result] = await pool.query("UPDATE users SET ? WHERE id = ?", [data, id]);
+                break;
+                
+            case "DELETE /delete/{id}":
+                [result] = await pool.query("DELETE FROM users WHERE id = ?", id);
+                break;
+                
+            default:
+                throw new Error(`Ruta no soportada: ${routeKey}`);
+        }
+
+        return {
+            statusCode: 200,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            body: JSON.stringify(result)
+        };
+
+    } catch (err) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: err.message })
+        };
+    }
+};
 
 // Ve a IAM > Users.
 // Selecciona tu usuario github-actions.
