@@ -30,4 +30,4 @@ jobs: #la lista de tareas.
 
       - name: Desplegar en Lambda
         run: |
-          aws lambda update-function-code --function-name Lambda-RDS --zip-file fileb://function.zip
+          aws lambda update-function-code --function-name lambda-rds-5a --zip-file fileb://function.zip
